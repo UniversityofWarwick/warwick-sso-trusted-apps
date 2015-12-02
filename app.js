@@ -5,7 +5,12 @@ const trustedApp = require('./lib/sso-trusted-app');
 
 var app = express();
 
-const PUBLIC_KEY = "SET ME";
+const PUBLIC_KEY =
+	"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmP5gpPXUwXix9MieRN1bgI4odNVuRkPj+nmyKiLZ5zNhH" +
+	"cecKzL9YFOf4LGvCjaukOt9thYdUBtgUdW0NjqqvtQ9PcnfDlNSdgfX/ag4X7WqKbJ8M+Z2yYsfQb32ItJYe/01OO" +
+	"U6/k6twt1X4qIAIvJsflBh6Qqtjualwek28kSGCtC1JC/4m2pLvWrfxJqZF8UrMeZt2Zge0TanXz1Dnbjnz8dAH61" +
+	"fABf7iFlCgkNn6U6jlYCoke9hMVMIWUe9Q5oBAre/jg5n8oCVLINgK7wWpIovBIT8foB7PL9SuM6gNkmtTVSBIvX3" +
+	"t+P8ghvi8xafgoicl06PzwOwthYCPwIDAQAB";
 
 trustedApp.setPublicKey(PUBLIC_KEY);
 

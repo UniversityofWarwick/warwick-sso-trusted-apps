@@ -2,6 +2,7 @@
 
 const express = require('express');
 const trustedApp = require('./lib/sso-trusted-app');
+const requestUrl = require('./lib/request-url');
 
 var app = express();
 
@@ -14,12 +15,11 @@ const PUBLIC_KEY =
 
 trustedApp.setPublicKey(PUBLIC_KEY);
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
+	let url = requestUrl.getTarget(req);
 	let providerId = req.header(trustedApp.HEADER_PROVIDER_ID);
 	let certificate = req.header(trustedApp.HEADER_CERTIFICATE);
 	let signature = req.header(trustedApp.HEADER_SIGNATURE);
-
-	let url = 'http://localhost:4040/';
 
 	let okay = trustedApp.verifySignature(url, certificate, signature);
 

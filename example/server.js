@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const trustedApps = require('./lib/sso-trusted-apps');
+const trustedApps = require('../lib/sso-trusted-apps');
 
 trustedApps.setSSOConfig(require('./sso-config.json'));
 

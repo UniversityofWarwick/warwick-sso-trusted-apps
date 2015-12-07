@@ -4,8 +4,9 @@ var expect = require('chai').expect;
 var assert = require('assert');
 var sinon = require('sinon');
 
+const SSO_CONFIG = require('./sso-config.json');
 var trustedApps = require('../lib/sso-trusted-apps');
-trustedApps.setSSOConfig(require('./sso-config.json'));
+trustedApps.setSSOConfig(SSO_CONFIG);
 
 let timestamp = Date.parse('2014-12-25 09:31:29.384');
 let url = 'http://warwick.ac.uk?external=true';
@@ -15,6 +16,8 @@ let exampleSignature =
   "skXI4GY5SCFJeosq3NDjj4Nkp5mFS8270hYsGisxQaoz9CwEnMT490DxqIB6ay801JGHXY68GSs0Cfv22IGumn3GhZ" +
   "3TYxaGHv63QYUsGATINoHlNkbnqmT5RfbnmywAb24rLrU5Scxa8Up3XWBNpmflmF//JybOhufRk7ewDLmtpfFFdwi6" +
   "elBjYtofUekVbxK811zzp1yd/IUhxq9nkODIMeSMYRdrZUCJcdJ963RCQBixzCxmkfN7Wiyw==";
+
+let app = SSO_CONFIG.trustedApps.apps.example;
 
 function errorObject(message) {
   return {
@@ -60,7 +63,7 @@ describe('sso-trusted-apps', () => {
   it('verifies a valid signature', () => {
     let certificate = trustedApps.createCertificate(timestamp, username);
 
-    expect(trustedApps.verifySignature(url, certificate, exampleSignature)).to.equal(true);
+    expect(trustedApps.verifySignature(app, url, certificate, exampleSignature)).to.equal(true);
   });
 
   it('refuses an invalid signature', () => {
@@ -68,7 +71,7 @@ describe('sso-trusted-apps', () => {
 
     let certificate = trustedApps.createCertificate(timestamp, username);
 
-    expect(trustedApps.verifySignature(url, certificate, exampleSignature)).to.equal(false);
+    expect(trustedApps.verifySignature(app, url, certificate, exampleSignature)).to.equal(false);
   });
 
   it('rejects if no provider id', () => {

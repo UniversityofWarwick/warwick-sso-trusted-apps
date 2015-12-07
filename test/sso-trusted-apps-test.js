@@ -16,6 +16,14 @@ let exampleSignature =
   "3TYxaGHv63QYUsGATINoHlNkbnqmT5RfbnmywAb24rLrU5Scxa8Up3XWBNpmflmF//JybOhufRk7ewDLmtpfFFdwi6" +
   "elBjYtofUekVbxK811zzp1yd/IUhxq9nkODIMeSMYRdrZUCJcdJ963RCQBixzCxmkfN7Wiyw==";
 
+function errorObject(message) {
+  return {
+    success: false,
+    status: 'Bad Request',
+    error: message
+  };
+}
+
 function mockRequest(headers) {
   return {
     protocol: 'https',
@@ -75,7 +83,7 @@ describe('sso-trusted-apps', () => {
 
     assert(res.status.calledWith(400));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
-    assert(res.send.calledWith('Provider ID not found in request'));
+    assert(res.send.calledWith(errorObject('Provider ID not found in request')));
 
     assert(next.called == false);
   });
@@ -93,7 +101,7 @@ describe('sso-trusted-apps', () => {
 
     assert(res.status.calledWith(400));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
-    assert(res.send.calledWith('Unknown application: random-provider'));
+    assert(res.send.calledWith(errorObject('Unknown application: random-provider')));
 
     assert(next.called == false);
   });
@@ -111,7 +119,7 @@ describe('sso-trusted-apps', () => {
 
     assert(res.status.calledWith(400));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
-    assert(res.send.calledWith('Missing signature in request'));
+    assert(res.send.calledWith(errorObject('Missing signature in request')));
 
     assert(next.called == false);
   });
@@ -130,7 +138,7 @@ describe('sso-trusted-apps', () => {
 
     assert(res.status.calledWith(400));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
-    assert(res.send.calledWith('Bad signature for URL: https://example.warwick.ac.uk/'));
+    assert(res.send.calledWith(errorObject('Bad signature for URL: https://example.warwick.ac.uk/')));
 
     assert(next.called == false);
   });

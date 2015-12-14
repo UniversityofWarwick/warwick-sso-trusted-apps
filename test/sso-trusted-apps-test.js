@@ -22,8 +22,12 @@ let app = SSO_CONFIG.trustedApps.apps.example;
 function errorObject(message) {
   return {
     success: false,
-    status: 'Bad Request',
-    error: message
+    status: 'Unauthorized',
+    errors: [
+      {
+        message: message
+      }
+    ]
   };
 }
 
@@ -84,7 +88,7 @@ describe('sso-trusted-apps', () => {
 
     trustedApps.middleware(req, res, next);
 
-    assert(res.status.calledWith(400));
+    assert(res.status.calledWith(401));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
     assert(res.send.calledWith(errorObject('Provider ID not found in request')));
 
@@ -102,7 +106,7 @@ describe('sso-trusted-apps', () => {
 
     trustedApps.middleware(req, res, next);
 
-    assert(res.status.calledWith(400));
+    assert(res.status.calledWith(401));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
     assert(res.send.calledWith(errorObject('Unknown application: random-provider')));
 
@@ -120,7 +124,7 @@ describe('sso-trusted-apps', () => {
 
     trustedApps.middleware(req, res, next);
 
-    assert(res.status.calledWith(400));
+    assert(res.status.calledWith(401));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
     assert(res.send.calledWith(errorObject('Missing signature in request')));
 
@@ -139,7 +143,7 @@ describe('sso-trusted-apps', () => {
 
     trustedApps.middleware(req, res, next);
 
-    assert(res.status.calledWith(400));
+    assert(res.status.calledWith(401));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
     assert(res.send.calledWith(errorObject('Bad signature for URL: https://example.warwick.ac.uk/')));
 

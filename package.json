@@ -15,12 +15,7 @@
     "email": "A.Cursley@warwick.ac.uk",
     "url": "http://warwick.ac.uk/webteam"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/MIT" 
-    }
-  ],
+  "license": "MIT",
   "dependencies": {
     "node-forge": "^0.6.38"
   },

@@ -19,12 +19,13 @@ let exampleSignature =
 
 let app = SSO_CONFIG.trustedApps.apps.example;
 
-function errorObject(message) {
+function errorObject(id, message) {
   return {
     success: false,
     status: 'Unauthorized',
     errors: [
       {
+        id: id,
         message: message
       }
     ]
@@ -90,7 +91,7 @@ describe('sso-trusted-apps', () => {
 
     assert(res.status.calledWith(401));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
-    assert(res.send.calledWith(errorObject('Provider ID not found in request')));
+    assert(res.send.calledWith(errorObject('no-provider-id', 'Provider ID not found in request')));
 
     assert(next.called == false);
   });
@@ -108,7 +109,7 @@ describe('sso-trusted-apps', () => {
 
     assert(res.status.calledWith(401));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
-    assert(res.send.calledWith(errorObject('Unknown application: random-provider')));
+    assert(res.send.calledWith(errorObject('unknown-app', 'Unknown application: random-provider')));
 
     assert(next.called == false);
   });
@@ -126,7 +127,7 @@ describe('sso-trusted-apps', () => {
 
     assert(res.status.calledWith(401));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
-    assert(res.send.calledWith(errorObject('Missing signature in request')));
+    assert(res.send.calledWith(errorObject('no-signature', 'Missing signature in request')));
 
     assert(next.called == false);
   });
@@ -145,7 +146,7 @@ describe('sso-trusted-apps', () => {
 
     assert(res.status.calledWith(401));
     assert(res.set.calledWith(trustedApps.HEADER_STATUS, 'Error'));
-    assert(res.send.calledWith(errorObject('Bad signature for URL: https://example.warwick.ac.uk/')));
+    assert(res.send.calledWith(errorObject('bad-signature', 'Bad signature for URL: https://example.warwick.ac.uk/')));
 
     assert(next.called == false);
   });
@@ -178,7 +179,7 @@ describe('sso-trusted-apps', () => {
 
     trustedApps.middleware(req, res, next);
 
-    expect(req.user).to.eql({});
+    expect(req.user).to.equal(undefined);
 
     assert(next.called);
   });

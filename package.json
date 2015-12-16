@@ -1,6 +1,6 @@
 {
   "name": "warwick-sso-trusted-apps",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Client/server implementation for Warwick Web Sign-On Trusted Applications",
   "main": "./lib/sso-trusted-apps.js",
   "scripts": {

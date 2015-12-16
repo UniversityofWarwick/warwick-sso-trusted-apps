@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "-"
+    "url": "ssh://git@repo.elab.warwick.ac.uk/start/node-sso-trusted-apps.git"
   },
   "author": {
     "name": "Alec Cursley",

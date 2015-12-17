@@ -9,7 +9,11 @@ var app = express();
 app.use(trustedApps.middleware);
 
 app.get('/*', (req, res) => {
-  res.send('Hello, ' + req.user.usercode);
+  if (req.user) {
+    res.send('Hello, ' + req.user.usercode);
+  } else {
+    res.send('Who are you?');
+  }
 });
 
 var server = app.listen(4040, () => {

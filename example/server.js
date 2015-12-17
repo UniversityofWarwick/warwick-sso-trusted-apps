@@ -1,9 +1,9 @@
 'use strict';
 
 const express = require('express');
-const trustedApps = require('../lib/sso-trusted-apps');
+const trustedApps = require('../lib/trusted-apps');
 
-trustedApps.setSSOConfig(require('./sso-config.json'));
+trustedApps.setConfig(require('./config.json'));
 
 var app = express();
 app.use(trustedApps.middleware);

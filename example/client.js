@@ -1,9 +1,9 @@
 'use strict';
 
 const fetch = require('node-fetch');
-const trustedApps = require('../lib/sso-trusted-apps');
+const trustedApps = require('../lib/trusted-apps');
 
-trustedApps.setSSOConfig(require('./sso-config.json'));
+trustedApps.setConfig(require('./config.json'));
 
 let timestamp = new Date().getTime();
 let providerId = 'example';

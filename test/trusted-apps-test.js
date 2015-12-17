@@ -4,9 +4,9 @@ var expect = require('chai').expect;
 var assert = require('assert');
 var sinon = require('sinon');
 
-const SSO_CONFIG = require('./sso-config.json');
-var trustedApps = require('../lib/sso-trusted-apps');
-trustedApps.setSSOConfig(SSO_CONFIG);
+const CONFIG = require('./config.json');
+var trustedApps = require('../lib/trusted-apps');
+trustedApps.setConfig(CONFIG);
 
 let timestamp = Date.parse('2014-12-25 09:31:29.384');
 let url = 'http://warwick.ac.uk?external=true';
@@ -17,7 +17,7 @@ let exampleSignature =
   "3TYxaGHv63QYUsGATINoHlNkbnqmT5RfbnmywAb24rLrU5Scxa8Up3XWBNpmflmF//JybOhufRk7ewDLmtpfFFdwi6" +
   "elBjYtofUekVbxK811zzp1yd/IUhxq9nkODIMeSMYRdrZUCJcdJ963RCQBixzCxmkfN7Wiyw==";
 
-let app = SSO_CONFIG.trustedApps.apps.example;
+let app = CONFIG.trustedApps.apps.example;
 
 function errorObject(id, message) {
   return {
@@ -49,7 +49,7 @@ function mockResponse() {
   return res;
 }
 
-describe('sso-trusted-apps', () => {
+describe('trusted-apps', () => {
 
   it('constructs the request URL', () => {
     let req = {

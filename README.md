@@ -1,11 +1,11 @@
-# Warwick SSO TrustedApps
+# Warwick Trusted Apps
 
-A Node.js client/server implementation for Warwick Web Sign-On Trusted Applications.
+A Node.js client/server implementation for Warwick Trusted Applications.
 
 ## Setup
 
-    var trustedApps = require('warwick-sso-trusted-apps');
-    trustedApps.setSSOConfig({
+    var trustedApps = require('warwick-trusted-apps');
+    trustedApps.setConfig({
       "shire": {
         "providerId": "example"
       },
@@ -26,7 +26,7 @@ A Node.js client/server implementation for Warwick Web Sign-On Trusted Applicati
     app.use(trustedApps.middleware);
 
     app.get('/', function (req, res) {
-      if (req.user.usercode) {
+      if (req.user) {
         res.send('Hello, ' + req.user.usercode);
       } else {
         res.send('Who are you?');

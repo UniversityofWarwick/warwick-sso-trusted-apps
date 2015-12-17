@@ -1,14 +1,14 @@
 {
-  "name": "warwick-sso-trusted-apps",
-  "version": "0.0.2",
-  "description": "Client/server implementation for Warwick Web Sign-On Trusted Applications",
-  "main": "./lib/sso-trusted-apps.js",
+  "name": "warwick-trusted-apps",
+  "version": "0.0.3",
+  "description": "Client/server implementation for Warwick Trusted Applications",
+  "main": "./lib/trusted-apps.js",
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha test"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@repo.elab.warwick.ac.uk/start/node-sso-trusted-apps.git"
+    "url": "https://github.com/UniversityofWarwick/warwick-trusted-apps.git"
   },
   "author": {
     "name": "Alec Cursley",

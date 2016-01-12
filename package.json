@@ -1,6 +1,6 @@
 {
   "name": "warwick-trusted-apps",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Client/server implementation for Warwick Trusted Applications",
   "main": "./lib/trusted-apps.js",
   "scripts": {

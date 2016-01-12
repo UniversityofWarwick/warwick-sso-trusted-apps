@@ -52,13 +52,24 @@ function mockResponse() {
 describe('trusted-apps', () => {
 
   it('constructs the request URL', () => {
+    let headers = {
+      'Host': 'example.warwick.ac.uk'
+    };
     let req = {
       protocol: 'https',
-      header: () => 'example.warwick.ac.uk',
+      header: (header) => headers[header],
       url: '/example'
     };
 
     expect(trustedApps.getRequestUrl(req)).to.equal('https://example.warwick.ac.uk/example')
+  });
+
+  it('uses X-Requested-URI if present', () => {
+    let req = mockRequest({
+      'X-Requested-URI': 'https://example.warwick.ac.uk/something/else'
+    });
+
+    expect(trustedApps.getRequestUrl(req)).to.equal('https://example.warwick.ac.uk/something/else');
   });
 
   it('creates a valid signature', () => {

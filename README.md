@@ -1,4 +1,4 @@
-# Warwick Trusted Apps
+# Warwick Trusted Apps [![Node.js CI](https://github.com/UniversityofWarwick/warwick-trusted-apps/actions/workflows/node.js.yml/badge.svg)](https://github.com/UniversityofWarwick/warwick-trusted-apps/actions/workflows/node.js.yml)
 
 A Node.js client/server implementation for Warwick Trusted Applications.
 
